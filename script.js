@@ -1,18 +1,14 @@
 import { videoData } from "./videosData.js";
 
-// parent container
 const heroContainer = document.querySelector(".hero-container");
-
-// select the existing video card (template)
 const videoTemplate = document.querySelector(".video-container");
 const searchInput = document.querySelector(".search-bar");
 const micBtn = document.querySelector(".mic-icon");
-
 const search = document.querySelector(".search-icon-container")
 
 
 function renderVideos(videos) {
-  heroContainer.innerHTML = ""; // clear previous videos
+  heroContainer.innerHTML = "";
 
   videos.forEach((video) => {
     const videoClone = videoTemplate.cloneNode(true);
@@ -59,7 +55,7 @@ const SpeechRecognition =
 
 const recognition = new SpeechRecognition();
 
-recognition.lang = "en-IN";   // Indian English
+recognition.lang = "en-IN";
 recognition.continuous = false;
 recognition.interimResults = false;
 
@@ -72,7 +68,6 @@ micBtn.addEventListener("click", () => {
 
 recognition.addEventListener("result", (event) => {
   const transcript = event.results[0][0].transcript;
-
   searchInput.value = transcript;
 
   // trigger filtering
@@ -81,10 +76,8 @@ recognition.addEventListener("result", (event) => {
 
 
 //Reuse filter
-
 function filterVideos(searchText) {
   searchText = searchText.toLowerCase();
-
   const filteredVideos = videoData.filter((video) => {
     return (
       video.title.toLowerCase().includes(searchText) ||
